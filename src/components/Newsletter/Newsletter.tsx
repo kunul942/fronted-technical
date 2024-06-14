@@ -1,10 +1,22 @@
-import { Newsletter as Props } from '@/interface';
+import { FormEvent } from 'react';
+
 import { Buttons } from '@/components';
+import { useForm } from '@/hooks';
+import { Newsletter as Props } from '@/interface';
+
 import styles from './Newsletter.module.css';
 
+const initialState = {
+    email: '',
+};
+
 export const Newsletter: React.FC<Props> = ({ title, desc, buttons }) => {
-    const onSubmit = (e: any) => {
-        // e.preventDefault();
+    const { form, onInputChange, onResetForm } = useForm(initialState);
+
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        onResetForm();
     };
 
     return (
@@ -26,6 +38,9 @@ export const Newsletter: React.FC<Props> = ({ title, desc, buttons }) => {
                             className={`border-2 rounded-lg p-2 w-full border-none outline-none shadow-md`}
                             type='email'
                             placeholder='Enter your e-mail here'
+                            name='email'
+                            value={form.email}
+                            onChange={onInputChange}
                         />
                     </div>
                     <div className='flex justify-center flex-wrap lg:flex-nowrap w-full'>

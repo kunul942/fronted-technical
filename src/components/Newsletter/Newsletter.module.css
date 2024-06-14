@@ -8,7 +8,7 @@ we are creating the image in the input email */
     display: block;
     height: 24px;
     width: 24px;
-    background-image: url('../../../assets/Newsletter/telegrama.png');
+    background-image: url('../../assets/Newsletter/telegrama.png');
     background-repeat: no-repeat;
 
     position: absolute;
