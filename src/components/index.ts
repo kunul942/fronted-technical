@@ -1,3 +1,4 @@
+export * from './layout/';
+export * from './Newsletter/';
 
-export * from './layout/'
-export * from './UI/'
+export * from './UI/';

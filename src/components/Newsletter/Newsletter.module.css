@@ -1,0 +1,27 @@
+.newsletter__email {
+    position: relative;
+}
+/* It'll be positioned with respect to his relative parent. With this process, 
+we are creating the image in the input email */
+.newsletter__email::after {
+    content: '';
+    display: block;
+    height: 24px;
+    width: 24px;
+    background-image: url('../../../assets/Newsletter/telegrama.png');
+    background-repeat: no-repeat;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+}
+
+/* effect that will be executed when hover is over the buttons of the newsletter */
+.newsletter__hover_effect {
+    transition: transform ease 1s;
+    cursor: pointer;
+}
+.newsletter__hover_effect:hover {
+    transform: scale(1.05);
+}
