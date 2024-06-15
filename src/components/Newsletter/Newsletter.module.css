@@ -25,3 +25,35 @@ we are creating the image in the input email */
 .newsletter__hover_effect:hover {
     transform: scale(1.05);
 }
+
+/* Modal */
+.newsletter__modal {
+    position: absolute;
+    top: 0;
+    right: 50%;
+
+    /* hiding the modal */
+    transform: translateY(-100%);
+    transition: transform ease 1s;
+    z-index: 999;
+}
+
+/* animation for modal when isSucces state is true*/
+.newsletter__modal--active {
+    transform: translate(50%, 150%);
+}
+
+/* modal container to have background with opacity */
+.newsletter__modal_container::before {
+    content: '';
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}

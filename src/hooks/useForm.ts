@@ -16,6 +16,10 @@ export const useForm = (initialState: FormData) => {
         });
     };
 
+    const onBlur = () => {
+        setErrors(formValidator(form));
+    };
+
     const onResetForm = () => {
         setForm(initialState);
     };
@@ -24,9 +28,13 @@ export const useForm = (initialState: FormData) => {
         e.preventDefault();
         setErrors(formValidator(form));
 
-        if (errors.email || formValidator(form).email) return;
+        if (formValidator(form).email) return;
 
         setIsSuccess(true);
+        setTimeout(() => {
+            setIsSuccess(false);
+            onResetForm();
+        }, 5000);
     };
 
     return {
@@ -35,7 +43,7 @@ export const useForm = (initialState: FormData) => {
         onInputChange,
         onResetForm,
         onSubmit,
-        // onBlur,
+        onBlur,
         errors,
         isSuccess,
     };
