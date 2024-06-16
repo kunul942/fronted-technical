@@ -1,40 +1,145 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Technical App
 
-## Getting Started
+This project implements a web application using Next.js, focusing on two main sections: Newsletter and Carousel. The application is designed to be responsive, following mobile-first design principles. The Newsletter section allows users to subscribe to updates, while the Carousel section provides a dynamic display of content.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   [Installation and Setup](#installation-and-setup)
+-   [Docker](#docker)
+-   [Design Decisions](#design-decisions)
+-   [Additional Configurations (not required)](#additional-configurations)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation and Setup
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Follow these steps to install and set up the project:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. **Clone the repository**:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    Using HTTPS:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    ```sh
+    git clone https://github.com/kunul942/fronted-technical.git
+    ```
 
-## Learn More
+    Using SSH:
 
-To learn more about Next.js, take a look at the following resources:
+    ```sh
+    git clone git@github.com:kunul942/fronted-technical.git
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    Then navigate to the project directory:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```sh
+    cd fronted-technical
+    ```
 
-## Deploy on Vercel
+2. **Install the dependencies**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```sh
+    npm install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. **Run the development server**:
+
+    ```sh
+    npm run dev
+    ```
+
+    The application will start on `http://localhost:3000`.
+
+4. **Build the application for production**:
+
+    ```sh
+    npm run build
+    ```
+
+5. **Start the application in production mode**:
+
+    ```sh
+    npm start
+    ```
+
+    The application will start on `http://localhost:3000`.
+
+## Docker
+
+This application is Dockerized and can be run in three different ways:
+
+1. Using `docker build` and `docker container run` commands.
+2. Using a shell script (`./init-docker.sh`).
+3. Using Docker Compose.
+
+Ensure you have Docker and Docker Compose installed on your system. You can download Docker from [here](https://www.docker.com/get-started) and Docker Compose from [here](https://docs.docker.com/compose/install/).
+
+### Running the App using Docker Build and Run Commands
+
+1. **Build the Docker image**:
+
+    ```sh
+    docker build -t frontend-technical .
+    ```
+
+2. **Run the Docker container**:
+    ```sh
+    docker container run -p 3000:3000 frontend-technical
+    ```
+
+### Using Shell Script
+
+1. **Make sure the script is executable**:
+
+    ```sh
+    chmod +x init-docker.sh
+    ```
+
+2. **Run the script**:
+    ```sh
+    ./init-docker.sh
+    ```
+
+### Using Docker Compose
+
+1. **Run Docker Compose**:
+
+    ```sh
+    docker-compose up
+    ```
+
+2. **To run in detached mode (background)**:
+
+    ```sh
+    docker-compose up -d
+    ```
+
+3. **To stop the services**:
+    ```sh
+    docker-compose down
+    ```
+
+## Design Decisions
+
+-   **CSS Frameworks**: Used Tailwind CSS for utility classes and Vanilla CSS for custom styles.
+-   **Styling Methodology**: Followed the BEM (Block Element Modifier) naming convention for CSS classes.
+-   **Styling Approach**: Utilized CSS Modules for scoped styling within components.
+
+## Additional Configurations
+
+### Husky
+
+-   **Purpose**: Automate code quality checks during commit and push stages.
+-   **Integration**: Hooks into Git lifecycle events.
+
+### Commitlint
+
+-   **Purpose**: Enforce consistent commit message format.
+-   **Integration**: Runs during commit message phase.
+
+### Prettier
+
+-   **Purpose**: Maintain consistent coding style.
+-   **Integration**: Formats code automatically.
+
+### ESLint
+
+-   **Purpose**: Identify and fix problems in JavaScript code.
+-   **Integration**: Analyzes code statically to enforce standards.
