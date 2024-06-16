@@ -2,6 +2,10 @@
 
 This project implements a web application using Next.js, focusing on two main sections: Newsletter and Carousel. The application is designed to be responsive, following mobile-first design principles. The Newsletter section allows users to subscribe to updates, while the Carousel section provides a dynamic display of content.
 
+## Project URL
+
+Access the [Frontend Technical App](https://frontend-technical.uc.r.appspot.com/), hosted on the Google Cloud Platform App Engine.
+
 ## Table of Contents
 
 -   [Installation and Setup](#installation-and-setup)
