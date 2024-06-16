@@ -70,8 +70,8 @@ export const Carousel = () => {
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index * 2)}
-                        className={`w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-700 focus:outline-none transition-colors duration-300 ${
-                            currentIndex === index * 2 ? 'bg-fuchsia-700' : ''
+                        className={`w-3 h-3 rounded-full bg-gray-300 focus:outline-none transition-colors duration-300 ${
+                            currentIndex === index * 2 ? 'bg-fuchsia-500' : ''
                         }`}
                         style={{ margin: '0.25rem' }}
                     ></button>
