@@ -51,6 +51,9 @@ export const Newsletter: React.FC<Props> = ({ title, desc, buttons }) => {
                     </form>
                 </div>
             </div>
+            <div>
+                <h1>I'm just something weird i want to add</h1>
+            </div>
 
             {/* Modal */}
             <Modal isSuccess={isSuccess} email={form.email} />
