@@ -2,8 +2,9 @@ name: Create Docker Image
 
 on:
     push:
-        branches:
-            - main
+        branches: ['dev', 'qa', 'main']
+        paths:
+            - '.github/workflows/deploy.yml'
 
 jobs:
     build:
