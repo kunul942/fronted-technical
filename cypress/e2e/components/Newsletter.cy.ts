@@ -1,0 +1,9 @@
+describe('template spec', () => {
+    it('passes', () => {
+        cy.visit('http://localhost:3000/');
+
+        cy.get('[data-testid=cypress-newsletter-title]')
+            .should('exist')
+            .should('have.text', 'Stay in touch');
+    });
+});
