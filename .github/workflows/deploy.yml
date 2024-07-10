@@ -46,4 +46,4 @@ jobs:
               uses: cypress-io/github-action@v5
 
             - name: Run test in prod
-              uses: npm run cypress-prod-test
+              run: npm run cypress-prod-test
