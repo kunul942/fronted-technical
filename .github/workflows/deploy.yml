@@ -28,7 +28,7 @@ jobs:
         env:
             PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
             REGION: us-central1
-            REPO_NAME: technical-app
+            REPO_NAME: frontend-technical
             ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT_NAME }}/technical-app
 
         steps:
