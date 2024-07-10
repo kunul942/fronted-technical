@@ -2,7 +2,7 @@ name: Create Docker Image
 
 on:
     push:
-        branches: ['main', 'feat/deploy-to-gcp']
+        branches: ['feat/deploy-to-gcp', 'main']
         paths:
             - '.github/workflows/deploy.yml'
 
