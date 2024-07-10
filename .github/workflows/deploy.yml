@@ -57,7 +57,7 @@ jobs:
               run: docker build . --tag $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
 
             - name: Push the image to Google Artifact Registry (GAR)
-              run: docker push $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
+              run: docker push $ARTIFACT_REGISTRY_REPO
 
             - name: Deploy
               run: |-
