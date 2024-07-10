@@ -7,28 +7,29 @@ on:
             - '.github/workflows/deploy.yml'
 
 jobs:
+    # build:
+    #     runs-on: ubuntu-latest
+
+    #     steps:
+    #         - name: Checkout repository
+    #           uses: actions/checkout@v2
+
+    #         - name: Build docker image
+    #           run: docker build -t frontend-technical:latest .
+
+    #         - name: Build docker container
+    #           run: docker run -d -p 3000:3000 frontend-technical
+
+    # deploy:
     build:
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
-
-            - name: Build docker image
-              run: docker build -t frontend-technical:latest .
-
-            - name: Build docker container
-              run: docker run -d -p 3000:3000 frontend-technical
-
-    deploy:
-        needs: build
+        # needs: build
         runs-on: ubuntu-latest
 
         env:
             PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
             REGION: us-central1
-            REPO_NAME: frontend-technical
-            ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT_NAME }}/frontend-technical-v2
+            REPO_NAME: technical-app
+            ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT_NAME }}/technical-app
 
         steps:
             - name: Checkout repository
