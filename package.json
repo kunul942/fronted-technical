@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "cypress-prod-test": "npx cypress run npx cypress run --config-file prod.config.ts",
+    "cypress-dev-test": "npx cypress run npx cypress run --config-file dev.config.ts"
   },
   "dependencies": {
     "next": "14.2.4",

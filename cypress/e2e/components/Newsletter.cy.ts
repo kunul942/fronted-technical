@@ -1,9 +1,6 @@
-describe('template spec', () => {
-    it('passes', () => {
-        cy.visit('http://localhost:3000/');
-
-        cy.get('[data-testid=cypress-newsletter-title]')
-            .should('exist')
-            .should('have.text', 'Stay in touch');
+describe('Newsletter component', () => {
+    it('displays the newsletter signup message in local', () => {
+        cy.visit('/');
+        cy.contains('Stay in touch');
     });
 });
