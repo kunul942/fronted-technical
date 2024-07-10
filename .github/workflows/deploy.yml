@@ -43,7 +43,4 @@ jobs:
               run: npm install
 
             - name: Run Cypress tests
-              uses: cypress-io/github-action@v5
-
-            - name: Run test in prod
               run: npm run cypress-prod-test
