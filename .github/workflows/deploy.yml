@@ -2,7 +2,7 @@ name: Create Docker Image
 
 on:
     push:
-        branches: ['dev', 'qa', 'main']
+        branches: ['main', 'feat/testing']
         paths:
             - '.github/workflows/deploy.yml'
 
@@ -47,4 +47,3 @@ jobs:
               with:
                   runTests: |
                       npm run cypress-prod-test
-                      npm run cypress-dev-test
