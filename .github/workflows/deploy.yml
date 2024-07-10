@@ -29,8 +29,8 @@ jobs:
             PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
             REGION: us-central1
             REPO_NAME: technical-app
-            # ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT_NAME }}/frontend-technical
-            ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/frontend-technical/technical-app/frontend-technical-v2
+            # ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/frontend-technical/technical-app/frontend-technical-v2
+            ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT_NAME }}/technical-app/frontend-technical-v2
 
         steps:
             - name: Checkout repository
