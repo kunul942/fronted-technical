@@ -2,7 +2,7 @@ name: Create Docker Image
 
 on:
     push:
-        branches: ['feat/deploy-to-gcp', 'main']
+        branches: ['main', 'feat/deploy-to-gcp']
         paths:
             - '.github/workflows/deploy.yml'
 
@@ -57,7 +57,7 @@ jobs:
               run: docker build . --tag $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
 
             - name: Push the image to Google Artifact Registry (GAR)
-              run: docker push $ARTIFACT_REGISTRY_REPO
+              run: docker push $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
 
             - name: Deploy
               run: |-
