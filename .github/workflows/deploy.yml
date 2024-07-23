@@ -1,99 +1,108 @@
-name: Create Docker Image
-
-on:
-    push:
-        branches: ['main', 'feat/deploy-to-gcp']
-        paths:
-            - '.github/workflows/deploy.yml'
-
-jobs:
-    # build:
-    #     runs-on: ubuntu-latest
-
-    #     steps:
-    #         - name: Checkout repository
-    #           uses: actions/checkout@v2
-
-    #         - name: Build docker image
-    #           run: docker build -t frontend-technical:latest .
-
-    #         - name: Build docker container
-    #           run: docker run -d -p 3000:3000 frontend-technical
-
-    # deploy:
-    build:
-        # needs: build
-        runs-on: ubuntu-latest
-
-        env:
-            PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
-            REGION: us-central1
-            REPO_NAME: technical-app
-            # ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/frontend-technical/technical-app/frontend-technical-v2
-            ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT_NAME }}/technical-app/frontend-technical-v2
-
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
-
-            # Authenticate with Google Cloud
-            - id: 'auth'
-              uses: 'google-github-actions/auth@v2'
-              with:
-                  credentials_json: '${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}'
-
-            # Setup gcloud CLI/SDK
-            - name: Set up Cloud SDK
-              uses: google-github-actions/setup-gcloud@v2
-
-            - name: Authorize Docker push
-              run: gcloud auth configure-docker us-central1-docker.pkg.dev
-
-              # Authenticate with Artifact Registry
-            - name: Authenticate Docker to Artifact Registry
-              run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
-
-            - name: Build and tag the docker image
-              run: docker build . --tag $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
-
-            - name: Push the image to Google Artifact Registry (GAR)
-              run: docker push $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
-
-            - name: Deploy
-              run: |-
-                  gcloud run deploy $REPO_NAME \
-                  --region $REGION \
-                  --image $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA \
-
-
-# name: Deploy to Cloud Run
+# name: Create Docker Image
 
 # on:
-#   push:
-#     branches:
-#       - feat/deploy-to-gcp
-#       - dev
-#     paths:
-#       - '.github/workflows/deploy.yml'
-  
+#     push:
+#         branches: ['main', 'feat/deploy-to-gcp']
+#         paths:
+#             - '.github/workflows/deploy.yml'
+
 # jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
+#     # build:
+#     #     runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2
+#     #     steps:
+#     #         - name: Checkout repository
+#     #           uses: actions/checkout@v2
 
-#       - name: Set up Docker Buildx
-#         run: docker buildx create --use
+#     #         - name: Build docker image
+#     #           run: docker build -t frontend-technical:latest .
 
-#       - name: Build and push Docker image
-#         run: make all
+#     #         - name: Build docker container
+#     #           run: docker run -d -p 3000:3000 frontend-technical
 
-#       - name: Authenticate with Google Cloud
-#         uses: google-github-actions/auth@v0
-#         with:
-#           service_account_key: ${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}
+#     # deploy:
+#     build:
+#         # needs: build
+#         runs-on: ubuntu-latest
 
-#       - name: Deploy to Cloud Run
-#         run: gcloud run services replace service.yml --platform managed --region us-central1
+#         env:
+#             PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
+#             REGION: us-central1
+#             REPO_NAME: technical-app
+#             # ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/frontend-technical/technical-app/frontend-technical-v2
+#             ARTIFACT_REGISTRY_REPO: us-central1-docker.pkg.dev/${{ secrets.CLOUD_RUN_PROJECT_NAME }}/technical-app/frontend-technical-v2
+
+#         steps:
+#             - name: Checkout repository
+#               uses: actions/checkout@v2
+
+#             # Authenticate with Google Cloud
+#             - id: 'auth'
+#               uses: 'google-github-actions/auth@v2'
+#               with:
+#                   credentials_json: '${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}'
+
+#             # Setup gcloud CLI/SDK
+#             - name: Set up Cloud SDK
+#               uses: google-github-actions/setup-gcloud@v2
+
+#             - name: Authorize Docker push
+#               run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+#               # Authenticate with Artifact Registry
+#             - name: Authenticate Docker to Artifact Registry
+#               run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
+
+#             - name: Build and tag the docker image
+#               run: docker build . --tag $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
+
+#             - name: Push the image to Google Artifact Registry (GAR)
+#               run: docker push $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA
+
+#             - name: Deploy
+#               run: |-
+#                   gcloud run deploy $REPO_NAME \
+#                   --region $REGION \
+#                   --image $ARTIFACT_REGISTRY_REPO/$REPO_NAME:$GITHUB_SHA \
+
+
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: ['main', 'feat/deploy-to-gcp']
+    paths:
+      - '.github/workflows/deploy.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
+      REGION: us-central1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Authenticate with Google Cloud
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+            credentials_json: '${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT }}'
+
+      # Setup gcloud CLI/SDK
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
+
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Authenticate Docker to Artifact Registry
+        run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
+
+      - name: Run Makefile to build, tag, push, and deploy
+        run: make all
