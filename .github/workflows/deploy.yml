@@ -71,8 +71,8 @@ name: Deploy to Cloud Run
 on:
   push:
     branches:
-      - dev
       - feat/deploy-to-gcp
+      - dev
     paths:
       - '.github/workflows/deploy.yml'
   
