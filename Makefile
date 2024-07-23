@@ -1,5 +1,8 @@
 # Makefile for building and deploying Next.js app to Cloud Run
 
+#push
+# docker tag frontend-technical:latest $(ARTIFACT_REGISTRY_REPO)/$(REPO_NAME):latest
+
 # Variables
 PROJECT_ID := frontend-technical
 REGION := us-central1
