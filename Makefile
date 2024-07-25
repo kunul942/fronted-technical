@@ -24,9 +24,6 @@ deploy:
     gcloud run deploy technical-app --region us-east4 --platform managed --allow-unauthenticated --source .
 
 
-# gcloud run deploy technical-app --image ${location}/${project}/${repo}/${image}:latest --region us-east4 --platform managed --allow-unauthenticated
-# gcloud run services replace service.yml --region us-central1
-
 local_run:
 	docker run -p 3000:3000 ${location}/${project}/${repo}/${image}:latest
 
