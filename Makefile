@@ -21,7 +21,7 @@ push:
 deploy:
 
 	sed -i 's|image: .*-docker.pkg.dev/.*|image: ${location}/${project}/${repo}/${image}:latest|g' service.yml
-	gcloud run services replace service.yml --region us-central1d
+	gcloud run services replace service.yml --region us-central1
 
 # gcloud run services replace service.yml --region us-central1
 
