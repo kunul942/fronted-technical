@@ -19,15 +19,10 @@ push:
 	docker push ${location}/${project}/${repo}/${image}:$(shell git rev-parse --short HEAD)
 
 deploy:
-
-	sed -i 's|image: .*-docker.pkg.dev/.*|image: ${location}/${project}/${repo}/${image}:latest|g' service.yml
-	gcloud run services replace service.yml --region us-central1
-
+	gcloud run deploy technical-app --image ${location}/${project}/${repo}/${image}:latest --region us-east4 --platform managed --allow-unauthenticated
 # gcloud run services replace service.yml --region us-central1
 
 local_run:
-# docker run -p 3000:3000 ${location}/${project}/${repo}/${image}:latest
-
-	gcloud run deploy technical-app --image ${location}/${project}/${repo}/${image}:latest --region us-east4 --platform managed --allow-unauthenticated
+	docker run -p 3000:3000 ${location}/${project}/${repo}/${image}:latest
 
 all: build tag push deploy
