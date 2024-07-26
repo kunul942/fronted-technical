@@ -1,0 +1,38 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
+      REGION: us-central1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Authenticate with Google Cloud
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+            credentials_json: '${{ secrets.CLOUD_RUN_SERVICE_ACCOUNT_PROD }}'
+
+      # Setup gcloud CLI/SDK
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.CLOUD_RUN_PROJECT_NAME_PROD }}
+
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Authenticate Docker to Artifact Registry
+        run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
+
+      - name: Run Makefile to build, tag, push, and deploy
+        run: make all-prod

@@ -70,7 +70,7 @@ name: Deploy to Cloud Run
 
 on:
   push:
-    branches: ['main', 'feat/deploy-to-gcp',]
+    branches: ['feat/deploy-to-gcp']
 
 jobs:
   build:
@@ -103,4 +103,4 @@ jobs:
         run: gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://us-central1-docker.pkg.dev
 
       - name: Run Makefile to build, tag, push, and deploy
-        run: make all
+        run: make all-dev
