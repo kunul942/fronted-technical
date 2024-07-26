@@ -54,4 +54,4 @@ deploy-prod:
 local_run:
 	docker run -p 3000:3000 ${location}/${project}/${repo}/${image}:latest
 
-all-prod: build-dev tag-dev push-dev service_yml-dev deploy-dev
+all-prod: build-prod tag-prod push-dev service_yml-prod deploy-prod
