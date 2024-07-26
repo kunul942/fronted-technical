@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-        - image: us-central1-docker.pkg.dev/frontend-technical-prod/technical-app-prod/frontend-technical-v2-prod:latest
+        - image: us-central1-docker.pkg.dev/frontend-technical-prod/technical-app-prod/frontend-technical-prod:latest
           name: frontend-technical-prod
           ports:
             - containerPort: 3000
