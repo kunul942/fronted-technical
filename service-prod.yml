@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: technical-app-prod
+spec:
+  template:
+    spec:
+      containers:
+        - image: us-central1-docker.pkg.dev/frontend-technical-prod/technical-app-prod/frontend-technical-v2-prod:latest
+          name: frontend-technical-prod
+          ports:
+            - containerPort: 3000
