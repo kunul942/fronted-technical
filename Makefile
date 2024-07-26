@@ -22,7 +22,7 @@ push-dev:
 	docker push ${location_dev}/${project_dev}/${repo_dev}/${image_dev}:$(shell git rev-parse --short HEAD)
 
 service_yml-dev:
-	sed -i 's|image: .*-docker.pkg.dev/.*|image: ${location_dev}/${project_dev}/${repo_dev}/${image_dev}:latest|g' service.yml 
+	sed -i 's|image: .*-docker.pkg.dev/.*|image: ${location_dev}/${project_dev}/${repo_dev}/${image_dev}:latest|g' service-dev.yml 
 
 deploy-dev:
 	gcloud run deploy technical-app --region us-central1 --platform managed --allow-unauthenticated --source .
@@ -45,7 +45,7 @@ push-prod:
 	docker push ${location_prod}/${project_prod}/${repo_prod}/${image_prod}:$(shell git rev-parse --short HEAD)
 
 service_yml-prod:
-	sed -i 's|image: .*-docker.pkg.dev/.*|image: ${location_prod}/${project_prod}/${repo_prod}/${image_prod}:latest|g' service.yml 
+	sed -i 's|image: .*-docker.pkg.dev/.*|image: ${location_prod}/${project_prod}/${repo_prod}/${image_prod}:latest|g' service-prod.yml 
 
 deploy-prod:
 	gcloud run deploy technical-app-prod --region us-central1 --platform managed --allow-unauthenticated --source .
