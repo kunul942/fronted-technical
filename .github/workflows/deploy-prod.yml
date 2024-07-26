@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME }}
+      PROJECT_ID: ${{ secrets.CLOUD_RUN_PROJECT_NAME_PROD }}
       REGION: us-central1
 
     steps:
