@@ -51,7 +51,7 @@ deploy-prod:
 	gcloud run deploy technical-app-prod --region us-central1 --platform managed --allow-unauthenticated --source .
 
 
-local_run:
+local_run-prod:
 	docker run -p 3000:3000 ${location_prod}/${project_prod}/${repo_prod}/${image_prod}:latest
 
 all-prod: build-prod tag-prod push-prod service_yml-prod deploy-prod
