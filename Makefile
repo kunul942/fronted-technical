@@ -3,7 +3,7 @@ project_dev=frontend-technical
 repo_dev=technical-app
 image_dev=frontend-technical-v2
 
-location_prod=us_central1-docker.pkg.dev
+location_prod=us-central1-docker.pkg.dev
 project_prod=frontend-technical-prod
 repo_prod=technical-app-prod
 image_prod=frontend-technical-prod
