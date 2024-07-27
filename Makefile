@@ -25,7 +25,11 @@ service_yml-dev:
 	sed -i 's|image: .*-docker.pkg.dev/.*|image: ${location_dev}/${project_dev}/${repo_dev}/${image_dev}:latest|g' service-dev.yml 
 
 deploy-dev:
-	gcloud run deploy technical-app --region us-central1 --platform managed --allow-unauthenticated --source .
+	gcloud run deploy technical-app \
+		--image=${location_dev}/${project_dev}/${repo_dev}/${image_dev}:latest \
+		--region us-central1 \
+		--platform managed \		
+		--allow-unauthenticated \
 
 
 local_run:
@@ -53,7 +57,6 @@ deploy-prod:
 		--region us-central1 \
 		--platform managed \		
 		--allow-unauthenticated \
-		--source .
 
 # gcloud run deploy technical-app-prod --region us-central1 --platform managed --allow-unauthenticated --source .
 
