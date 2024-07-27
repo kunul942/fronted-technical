@@ -28,8 +28,9 @@ deploy-dev:
 	gcloud run deploy technical-app \
 		--image=${location_dev}/${project_dev}/${repo_dev}/${image_dev}:latest \
 		--region us-central1 \
-		--platform managed \		
-		--allow-unauthenticated \
+		--platform managed \
+		--allow-unauthenticated
+
 
 
 local_run:
@@ -55,8 +56,8 @@ deploy-prod:
 	gcloud run deploy technical-app-prod \
 		--image=${location_prod}/${project_prod}/${repo_prod}/${image_prod}:latest \
 		--region us-central1 \
-		--platform managed \		
-		--allow-unauthenticated \
+		--platform managed \
+		--allow-unauthenticated
 
 # gcloud run deploy technical-app-prod --region us-central1 --platform managed --allow-unauthenticated --source .
 
