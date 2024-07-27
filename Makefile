@@ -32,7 +32,6 @@ deploy-dev:
 		--allow-unauthenticated
 
 
-
 local_run:
 	docker run -p 3000:3000 ${location_dev}/${project_dev}/${repo_dev}/${image}:latest
 
